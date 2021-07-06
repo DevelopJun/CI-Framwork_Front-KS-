@@ -1,0 +1,21 @@
+{
+    "topics": [
+        {
+            "id": 1,
+            "title": "fetch",
+            "body": "fetch is ..."
+        }
+    ],
+    "comments": [
+        {
+            "id": 1,
+            "body": "first comments is ...",
+            "topicId":1
+        },
+        {
+            "id": 2,
+            "body": "second comments is ...",
+            "topicId":1
+        }
+    ]
+}
