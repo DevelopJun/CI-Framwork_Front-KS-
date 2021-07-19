@@ -26,7 +26,7 @@
                 <button class="btn btn-primary btn-block" type="submit" > Sign in</button>
               </div>
               <br>
-              <a href="http://1.234.15.177/test/register">Have no account, create new account</a>
+              <a href="/test/register">Have no account, create new account</a>
             </form>
           </div>
       </div>
