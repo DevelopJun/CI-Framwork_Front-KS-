@@ -142,188 +142,38 @@ class App extends BaseConfig
 
 	/**
 	 * --------------------------------------------------------------------------
-	 * Session Driver
+	 * Session Driver				: The session storage driver
+	 * Session Cookie Name			: The session cookie name, must contain only [0-9a-z_-] characters
+	 * Session Expiration			: The number of SECONDS you want the session to last.
+	 * Session Save Path			: The location to save sessions to and is driver dependent.
+	 * Session Match IP				: Whether to match the user's IP address when reading the session data.
+	 * Session Time to Update		: How many seconds between CI regenerating the session ID.
+	 * Session Regenerate Destroy	: Whether to destroy session data associated with the old session ID when auto-regenerating the session ID. When set to FALSE, the data will be later deleted by the garbage collector.
 	 * --------------------------------------------------------------------------
-	 *
-	 * The session storage driver to use:
-	 * - `CodeIgniter\Session\Handlers\FileHandler`
-	 * - `CodeIgniter\Session\Handlers\DatabaseHandler`
-	 * - `CodeIgniter\Session\Handlers\MemcachedHandler`
-	 * - `CodeIgniter\Session\Handlers\RedisHandler`
-	 *
-	 * @var string
 	 */
-	public $sessionDriver = 'CodeIgniter\Session\Handlers\FileHandler';
-
-	/**
-	 * --------------------------------------------------------------------------
-	 * Session Cookie Name
-	 * --------------------------------------------------------------------------
-	 *
-	 * The session cookie name, must contain only [0-9a-z_-] characters
-	 *
-	 * @var string
-	 */
+	public $sessionDriver = 'CodeIgniter\Session\Handlers\RedisHandler';
 	public $sessionCookieName = 'ci_session';
-
-	/**
-	 * --------------------------------------------------------------------------
-	 * Session Expiration
-	 * --------------------------------------------------------------------------
-	 *
-	 * The number of SECONDS you want the session to last.
-	 * Setting to 0 (zero) means expire when the browser is closed.
-	 *
-	 * @var integer
-	 */
 	public $sessionExpiration = 7200;
-
-	/**
-	 * --------------------------------------------------------------------------
-	 * Session Save Path
-	 * --------------------------------------------------------------------------
-	 *
-	 * The location to save sessions to and is driver dependent.
-	 *
-	 * For the 'files' driver, it's a path to a writable directory.
-	 * WARNING: Only absolute paths are supported!
-	 *
-	 * For the 'database' driver, it's a table name.
-	 * Please read up the manual for the format with other session drivers.
-	 *
-	 * IMPORTANT: You are REQUIRED to set a valid save path!
-	 *
-	 * @var string
-	 */
-	public $sessionSavePath = WRITEPATH . 'session';
-
-	/**
-	 * --------------------------------------------------------------------------
-	 * Session Match IP
-	 * --------------------------------------------------------------------------
-	 *
-	 * Whether to match the user's IP address when reading the session data.
-	 *
-	 * WARNING: If you're using the database driver, don't forget to update
-	 *          your session table's PRIMARY KEY when changing this setting.
-	 *
-	 * @var boolean
-	 */
+	public $sessionSavePath = 'tcp://1.234.15.177:6379'; // for redis
 	public $sessionMatchIP = false;
-
-	/**
-	 * --------------------------------------------------------------------------
-	 * Session Time to Update
-	 * --------------------------------------------------------------------------
-	 *
-	 * How many seconds between CI regenerating the session ID.
-	 *
-	 * @var integer
-	 */
 	public $sessionTimeToUpdate = 300;
-
-	/**
-	 * --------------------------------------------------------------------------
-	 * Session Regenerate Destroy
-	 * --------------------------------------------------------------------------
-	 *
-	 * Whether to destroy session data associated with the old session ID
-	 * when auto-regenerating the session ID. When set to FALSE, the data
-	 * will be later deleted by the garbage collector.
-	 *
-	 * @var boolean
-	 */
 	public $sessionRegenerateDestroy = false;
 
 	/**
 	 * --------------------------------------------------------------------------
-	 * Cookie Prefix
+	 * Cookie Prefix				: Set a cookie name prefix if you need to avoid collisions.
+	 * Cookie Domain				: Set to `.your-domain.com` for site-wide cookies.
+	 * Cookie Path					: Typically will be a forward slash.
+	 * Cookie Secure				: Cookie will only be set if a secure HTTPS connection exists.
+	 * Cookie HttpOnly				: Cookie will only be accessible via HTTP(S) (no JavaScript).
+	 * Cookie SameSite				: Configure cookie SameSite setting.
 	 * --------------------------------------------------------------------------
-	 *
-	 * Set a cookie name prefix if you need to avoid collisions.
-	 *
-	 * @var string
-	 *
-	 * @deprecated use Config\Cookie::$prefix property instead.
 	 */
 	public $cookiePrefix = '';
-
-	/**
-	 * --------------------------------------------------------------------------
-	 * Cookie Domain
-	 * --------------------------------------------------------------------------
-	 *
-	 * Set to `.your-domain.com` for site-wide cookies.
-	 *
-	 * @var string
-	 *
-	 * @deprecated use Config\Cookie::$domain property instead.
-	 */
 	public $cookieDomain = '';
-
-	/**
-	 * --------------------------------------------------------------------------
-	 * Cookie Path
-	 * --------------------------------------------------------------------------
-	 *
-	 * Typically will be a forward slash.
-	 *
-	 * @var string
-	 *
-	 * @deprecated use Config\Cookie::$path property instead.
-	 */
 	public $cookiePath = '/';
-
-	/**
-	 * --------------------------------------------------------------------------
-	 * Cookie Secure
-	 * --------------------------------------------------------------------------
-	 *
-	 * Cookie will only be set if a secure HTTPS connection exists.
-	 *
-	 * @var boolean
-	 *
-	 * @deprecated use Config\Cookie::$secure property instead.
-	 */
 	public $cookieSecure = false;
-
-	/**
-	 * --------------------------------------------------------------------------
-	 * Cookie HttpOnly
-	 * --------------------------------------------------------------------------
-	 *
-	 * Cookie will only be accessible via HTTP(S) (no JavaScript).
-	 *
-	 * @var boolean
-	 *
-	 * @deprecated use Config\Cookie::$httponly property instead.
-	 */
 	public $cookieHTTPOnly = true;
-
-	/**
-	 * --------------------------------------------------------------------------
-	 * Cookie SameSite
-	 * --------------------------------------------------------------------------
-	 *
-	 * Configure cookie SameSite setting. Allowed values are:
-	 * - None
-	 * - Lax
-	 * - Strict
-	 * - ''
-	 *
-	 * Alternatively, you can use the constant names:
-	 * - `Cookie::SAMESITE_NONE`
-	 * - `Cookie::SAMESITE_LAX`
-	 * - `Cookie::SAMESITE_STRICT`
-	 *
-	 * Defaults to `Lax` for compatibility with modern browsers. Setting `''`
-	 * (empty string) means default SameSite attribute set by browsers (`Lax`)
-	 * will be set on cookies. If set to `None`, `$cookieSecure` must also be set.
-	 *
-	 * @var string
-	 *
-	 * @deprecated use Config\Cookie::$samesite property instead.
-	 */
 	public $cookieSameSite = 'Lax';
 
 	/**
