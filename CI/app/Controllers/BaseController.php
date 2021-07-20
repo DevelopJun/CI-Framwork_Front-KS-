@@ -23,13 +23,6 @@ use Psr\Log\LoggerInterface;
 class BaseController extends Controller
 {
 	/**
-	 * Instance of the main Request object.
-	 *
-	 * @var IncomingRequest|CLIRequest
-	 */
-	protected $request;
-
-	/**
 	 * An array of helpers to be loaded automatically upon
 	 * class instantiation. These helpers will be available
 	 * to all other controllers that extend BaseController.
@@ -37,6 +30,9 @@ class BaseController extends Controller
 	 * @var array
 	 */
 	protected $helpers = [];
+	protected $session = null;
+	protected $display  = null;
+	protected $request = null;
 
 	/**
 	 * Constructor.
@@ -54,5 +50,10 @@ class BaseController extends Controller
 		// Preload any models, libraries, etc, here.
 		//--------------------------------------------------------------------
 		// E.g.: $this->session = \Config\Services::session();
+		$this->display = new  \App\Models\util\Display_model();
+		$this->display->setResponse($response);
+		$this->request = $request;
+		$this->session = \Config\Services::session();
+
 	}
 }
