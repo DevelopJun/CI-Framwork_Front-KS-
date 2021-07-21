@@ -14,8 +14,9 @@
     <div class="container">
       <div class="row" style="margin-top:45px">
           <div class="col-md-4 col-md-offset-4">
-            <h4>Korea surver hosting sign In</h4>
-            <form action="<?= base_url('test/save'); ?>" method="">
+            <h4>Korea surver hosting sign UP</h4>
+            <br>
+            <form action="/test/save/" method="post">
               <?= csrf_field(); ?>
               <!-- 이 부분이 csrf_field 만들어서 난중에 사용하도록 설정함 -->
               <div class="form-group">
@@ -26,21 +27,24 @@
               </div>
               <div class="form-group">
                 <label for="">Email</label>
-                <input type="text" class="form-control" name="name" placeholder="Enter your Email">
+                <input type="text" class="form-control" name="email" placeholder="Enter your Email">
+                <span class="text-danger"><?= isset($validation) ? display_error($validation, 'email') : '' ?></span>
               </div>
               <div class="form-group">
                 <label for="">Password</label>
-                <input type="text" class="form-control" name="password" placeholder="Enter your Password">
+                <input type="text" class="form-control" name="password" placeholder="Enter your Password" >
+                <span class="text-danger"><?= isset($validation) ? display_error($validation, 'password') : '' ?></span>
               </div>
               <div class="form-group">
                 <label for="">Cpassword</label>
-                <input type="text" class="form-control" name="cpassword" placeholder="Enter your Cpassword">
+                <input type="text" class="form-control" name="cpassword" placeholder="Enter your Cpassword" >
+                <span class="text-danger"><?= isset($validation) ? display_error($validation, 'cpassword') : '' ?></span>
               </div>
               <div class="form-group">
-                <button class="btn btn-primary btn-block" type="submit" > Sign in</button>
+                <button class="btn btn-primary btn-block" type="submit" > Sign UP</button>
               </div>
               <br>
-              <a href="http://1.234.15.177/test/">I already have account, login now</a>
+              <a href="/test/">I already have account, login now</a>
             </form>
 
           </div>

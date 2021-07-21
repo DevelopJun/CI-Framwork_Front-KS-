@@ -9,7 +9,7 @@
     <!--위에 보이는게 지금 stylesheet 경로이다. public 아래에 만들어야 하고, asset 밑에 넣으면 에러가 발생한다. 이렇게 넣어야 정상 작동함.-->
   </head>
   <body>
-    <div class="container">
+    <div class="container" style="margin-top: 120px;">
       <div class="row" style="margin-top:45px">
           <div class="col-md-4 col-md-offset-4">
             <h4>Korea surver hosting sign In</h4>
