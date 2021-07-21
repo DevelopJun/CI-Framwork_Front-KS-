@@ -71,7 +71,7 @@ class App extends BaseConfig
 	 *
 	 * @var string
 	 */
-	public $defaultLocale = 'en';
+	public $defaultLocale = 'kr';
 
 	/**
 	 * --------------------------------------------------------------------------
@@ -110,7 +110,7 @@ class App extends BaseConfig
 	 *
 	 * @var string
 	 */
-	public $appTimezone = 'America/Chicago';
+	public $appTimezone = 'Asia/Seoul';
 
 	/**
 	 * --------------------------------------------------------------------------
@@ -170,10 +170,10 @@ class App extends BaseConfig
 	 * --------------------------------------------------------------------------
 	 */
 	public $cookiePrefix = '';
-	public $cookieDomain = '';
+	public $cookieDomain = ''; //
 	public $cookiePath = '/';
 	public $cookieSecure = false;
-	public $cookieHTTPOnly = true;
+	public $cookieHTTPOnly = false;
 	public $cookieSameSite = 'Lax';
 
 	/**
