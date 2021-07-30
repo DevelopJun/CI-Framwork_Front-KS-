@@ -18,16 +18,14 @@
 <div id="leftcolumn">
 	<div class="subtop">
 		<ul>
-			<li style="font-size:13pt;">{kn_name}</li>
-			<!-- <li class="listm_on"><span style="font-weight:bold;">section1</span></li> -->
-			<li class="listm_l"><a href="#" class="left_subtitle" style="font-weight:bold;">{kn_name}</a></li>
-			<li class="listm_2"><a href="#" class="left_subtitle" style="font-weight:bold;">{kn_name}</a></li>
+			<li style="font-size:11pt;">name1</li>
+			<li class="listm_on"><span style="font-weight:bold;">1-1</span></li>
+			<li class="listm_l"><a href="" class="left_subtitle"><span style="font-weight:bold;color:red;">1-1-1</span></a></li>
+			<li class="listm_l"><a href="" class="left_subtitle">1-1-2</a></li>
+			<li class="listm"><a href=""><span style="font-weight:bold;">1-2</span></a></li>
 		</ul>
 	</div>
 </div>
 
 <script type="text/javascript">
-<!--
-	change_bg(<?=$_change_bg_no?>); // 선택한 대분류 색깔나오기.
-//-->
 </script>
