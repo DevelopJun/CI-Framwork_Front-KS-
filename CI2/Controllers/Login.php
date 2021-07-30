@@ -12,12 +12,6 @@ class Login extends BaseController {
 			return redirect()->to('/');
 		}
 		return view('login');
-		/*
-		$this->display->setTop('');
-		$this->display->setLeft('');
-		$this->display->setFooter('');
-		return $this->display->load('login', []);
-		*/
 	}
 
 	public function loginCheck(){
@@ -26,7 +20,7 @@ class Login extends BaseController {
 			$sGrantType = 'password';
 			$aOauthRes = Util::oauth_request($aParams, $sGrantType, '', '');
 			if (!$aOauthRes){
-				return $this->display->doBack('로그인 확인');
+				return $this->display->doBack('다시 시도');
 			}
 		}
 		return redirect()->to('/');
