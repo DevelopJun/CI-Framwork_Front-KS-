@@ -1,3 +1,34 @@
+<!-- 토큰 쿠키 저장 연결 js 파일-->
+<script src="/js/Ajax/setcookie.js"></script>
+<!-- Ajax 공통 모듈 연결 js 파일-->
+<script src="/js/Ajax/Ajax(common).js"></script>
+
+
+<script>
+// jwt 토큰 보안 - loal localStorage 에 넣는 방법1 (불필요시 삭제)
+function saveJWT(){
+    localStorage.setItem('jwt_token', '<?= $_SESSION['ksadmin']['sAccessToken'] ?>' );
+};
+saveJWT();
+</script>
+
+<script>
+// jwt 토큰 보안 - cookie에 넣는 방법2
+function saveJWTinCookie(name, value, days) {
+        if (days) {
+                var date = new Date();
+                date.setTime(date.getTime() + (days * 24 * 60 * 60 * 1000));
+                var expires = "; expires=" + date.toGMTString();
+        } else {
+               var expires = "";
+        }
+
+        document.cookie = name + "=" + value + expires + "; path=/";
+}
+saveJWTinCookie('jwt_token', '<?= $_SESSION['ksadmin']['sAccessToken'] ?>', 50);
+</script>
+
+
 <script>
 	function modify(){
 		var form = document.modifyform;
@@ -9,26 +40,7 @@
 			alert("내용을 입력해주세요.");
 			return;
 		}
-		$.ajax({
-			type: "put",
-			data: $(form).serialize(),
-			contentType: "application/x-www-form-urlencoded",
-			url: "http://apigw.ksdev.net/api/v1/ksadmin/admin/board/<?= $idx ?>",
-			success: function (data){
-				if (data.code == 200){
-					alert("수정완료");
-					location.href="/company/board/detail?idx=<?= $idx ?>";
-				} else {
-					alert(data.message);
-				}
-			},
-			fail: function (data){
-				alert(data.message);
-			},
-			error: function (data){
-				alert(data.message);
-			}
-		});
+		AJAX.put($(form),<?= $idx ?>, getCookie('jwt_token')); // Ajax 공통모듈 분리 완료.
 	}
 </script>
 <div class="row">

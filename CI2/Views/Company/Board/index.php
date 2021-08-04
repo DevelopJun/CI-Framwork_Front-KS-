@@ -4,8 +4,7 @@
 	});
 
 	function getList(){
-		dTCreate("board", "/api/v1/ksadmin/admin/board", Cols, '5','','search');
-		console.log(dTCreate);
+		dTCreate("board", "/api/v1/ksadmin/admin/board", Cols, '20','','search');
 	}
 
 	var Cols = function(){
