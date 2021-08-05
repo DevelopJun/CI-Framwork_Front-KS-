@@ -13,28 +13,25 @@ saveJWT();
 
 <script>
 // jwt 토큰 보안 - cookie에 넣는 방법2
-function saveJWTinCookie(name, value) {
-        // if (days) {
-        //         var date = new Date();
-        //         date.setTime(date.getTime() + (days * 24 * 60 * 60 * 1000));
-        //         var expires = "; expires=" + date.toGMTString();
-        // } else {
-        //        var expires = "";
-        // }
-        // Set-Cookie: name + "=" + value + expires + "; path=/"; HttpOnly
-        document.cookie = name + "=" + value + 'max-age=3600; secure' + "; path=/"; // httpOnly 부분은 서버에서 header 안에 넣어야함
-        // document.cookie = name + "=" + value + "httpOnly";
-        // Set-Cookie: name=value; Expires=expires; HttpOnly;
-};
-saveJWTinCookie('jwt_token', '<?= $_SESSION['ksadmin']['sAccessToken'] ?>');
+var i = 0;
+var date = new Date();
+var time = date.getTime();
+if( i == 0){
+    var expireTime = time + 8000; // 현재 쿠키 만료 약 14분 설정
+}else{
+    var expireTime = 0; // 초기화를 해줘야 한다. 새로고침을 계속 눌렀더니.. cookie 계속 쌓여서 많이 증가함.
+    var expireTime = time + 8000; // 현재 쿠키 만료 약 14분 설정
+}
+i++ ;
+date.setTime(expireTime);
+document.cookie = 'jwt_token=<?= $_SESSION['ksadmin']['sAccessToken'] ?>;expires='+date+';path=/';
 </script>
-
 
 
 <script>
 	function remove(idx){
         if (confirm("삭제하시겠습니까?")){
-            AJAX.delete(idx, <?= $_SESSION['info']['idx'] ?>, <?= $idx ?>, getCookie('jwt_token')); // Ajax 공통모듈 분리 완료.
+            AJAX.delete('https://apigw.ksdev.net/api/v1/ksadmin/admin/board/', idx, <?= $_SESSION['info']['idx'] ?>, <?= $idx ?>, getCookie('jwt_token')); // Ajax 공통모듈 분리 완료.
 		}
 	}
 </script>

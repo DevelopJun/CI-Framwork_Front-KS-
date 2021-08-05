@@ -14,19 +14,20 @@ saveJWT();
 
 <script>
 // jwt 토큰 보안 - cookie에 넣는 방법2
-function saveJWTinCookie(name, value, days) {
-        if (days) {
-                var date = new Date();
-                date.setTime(date.getTime() + (days * 24 * 60 * 60 * 1000));
-                var expires = "; expires=" + date.toGMTString();
-        } else {
-               var expires = "";
-        }
-
-        document.cookie = name + "=" + value + expires + "; path=/";
+var i = 0;
+var date = new Date();
+var time = date.getTime();
+if( i == 0){
+    var expireTime = time + 8000; // 현재 쿠키 만료 약 14분 설정
+}else{
+    var expireTime = 0; // 초기화를 해줘야 한다. 새로고침을 계속 눌렀더니.. cookie 계속 쌓여서 많이 증가함.
+    var expireTime = time + 8000; // 현재 쿠키 만료 약 14분 설정
 }
-saveJWTinCookie('jwt_token', '<?= $_SESSION['ksadmin']['sAccessToken'] ?>', 50);
+i++ ;
+date.setTime(expireTime);
+document.cookie = 'jwt_token=<?= $_SESSION['ksadmin']['sAccessToken'] ?>;expires='+date+';path=/';
 </script>
+
 
 
 <script>

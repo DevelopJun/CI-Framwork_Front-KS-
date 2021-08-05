@@ -1,10 +1,17 @@
+<!-- 토큰 쿠키 저장 연결 js 파일-->
+<script src="/js/Ajax/setcookie.js"></script>
+<!-- Ajax 공통 모듈 연결 js 파일-->
+<script src="/js/Ajax/Ajax(common).js"></script>
+
 <script>
 	$(document).ready(function() {
 		getList();
+		console.log(getList());
 	});
 
 	function getList(){
 		dTCreate("board", "/api/v1/ksadmin/admin/board", Cols, '20','','search');
+		console.log(dTCreate);
 	}
 
 	var Cols = function(){

@@ -14,23 +14,24 @@ saveJWT();
 
 <script>
 // jwt 토큰 보안 - cookie에 넣는 방법2
-function saveJWTinCookie(name, value, days) {
-        if (days) {
-                var date = new Date();
-                date.setTime(date.getTime() + (days * 24 * 60 * 60 * 1000));
-                var expires = "; expires=" + date.toGMTString();
-        } else {
-               var expires = "";
-        }
-
-        document.cookie = name + "=" + value + expires + "; path=/";
+var i = 0;
+var date = new Date();
+var time = date.getTime();
+if( i == 0){
+    var expireTime = time + 8000; // 현재 쿠키 만료 약 14분 설정
+}else{
+    var expireTime = 0; // 초기화를 해줘야 한다. 새로고침을 계속 눌렀더니.. cookie 계속 쌓여서 많이 증가함.
+    var expireTime = time + 8000; // 현재 쿠키 만료 약 14분 설정
 }
-saveJWTinCookie('jwt_token', '<?= $_SESSION['ksadmin']['sAccessToken'] ?>', 50);
+i++ ;
+date.setTime(expireTime);
+document.cookie = 'jwt_token=<?= $_SESSION['ksadmin']['sAccessToken'] ?>;expires='+date+';path=/';
 </script>
 
 
 <script>
 	function write(){
+        console.log(document.cookie);
 		var form = document.writeform;
 		if (!$("input[name=title]").val()){
 			alert("제목을 입력해주세요.");
@@ -40,7 +41,7 @@ saveJWTinCookie('jwt_token', '<?= $_SESSION['ksadmin']['sAccessToken'] ?>', 50);
 			alert("내용을 입력해주세요.");
 			return;
 		}
-        AJAX.post($(form), getCookie('jwt_token')); // Ajax 공통모듈 분리 완료
+        AJAX.post( "https://apigw.ksdev.net/api/v1/ksadmin/admin/board", $(form), getCookie('jwt_token')); // Ajax 공통모듈 분리 완료
 	}
 </script>
 <div class="row">
