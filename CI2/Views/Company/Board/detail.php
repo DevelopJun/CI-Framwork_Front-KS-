@@ -17,22 +17,32 @@ var i = 0;
 var date = new Date();
 var time = date.getTime();
 if( i == 0){
-    var expireTime = time + 8000; // 현재 쿠키 만료 약 14분 설정
+    var expireTime = time + timeset; // 현재 쿠키 만료 약 30초 설정(테스트 진행)
 }else{
-    var expireTime = 0; // 초기화를 해줘야 한다. 새로고침을 계속 눌렀더니.. cookie 계속 쌓여서 많이 증가함.
-    var expireTime = time + 8000; // 현재 쿠키 만료 약 14분 설정
+    var expireTime = 0; // 새로고침시. cookie 가중 증가 문제. 초기화 세팅.
+    var expireTime = time + timeset; // 현재 쿠키 만료 약 30 초 설정(테스트 진행)
 }
 i++ ;
 date.setTime(expireTime);
+compare = expireTime;
 document.cookie = 'jwt_token=<?= $_SESSION['ksadmin']['sAccessToken'] ?>;expires='+date+';path=/';
 </script>
 
 
 <script>
 	function remove(idx){
-        if (confirm("삭제하시겠습니까?")){
-            AJAX.delete('https://apigw.ksdev.net/api/v1/ksadmin/admin/board/', idx, <?= $_SESSION['info']['idx'] ?>, <?= $idx ?>, getCookie('jwt_token')); // Ajax 공통모듈 분리 완료.
-		}
+        var date = new Date();
+        var timec = date.getTime();
+        if(timec <= compare){
+            console.log("쿠키 만료되기 전에 정상적으로 작성 되었습니다.");
+            if (confirm("삭제하시겠습니까?")){
+                AJAX.delete('https://apigw.ksdev.net/api/v1/ksadmin/admin/board/', idx, <?= $_SESSION['info']['idx'] ?>, <?= $idx ?>, getCookie('jwt_token')); // Ajax 공통모듈 분리 완료.
+    		}
+        }else{
+            console.log("쿠키가 만료되어 글을 삭제할 수 없습니다.");
+            alert("쿠키가 만료되어 글을 삭제할 수 없습니다.");
+            location.reload(true); // 현재 페이지로 다시 새로고침하여 쿠키 다시발급 방법
+        }
 	}
 </script>
 
