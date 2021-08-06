@@ -4,13 +4,13 @@
 *author 정준호
 */
 
+// 쿠키 만료 시간 설정 부분.
+const timeset = 8000;
+
 // 쿠키에서 토큰 받아 오는 구간
 function getCookie(key){
-    // var cookie = document.cookie;
-    // if(){
-    //
-    // }
     var result = document.cookie.split("=");
+// 다시한번
 
     // 그럼 여기서 accesstoken을 재발급 받야 하는가?
     if(key === result[0]){

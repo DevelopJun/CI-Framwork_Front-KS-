@@ -3,17 +3,24 @@
 * --------------------
 *author 정준호
 */
-// 재 발급 받는 부분
+
+
+// sAccessToken 소멸시, 로그인 화면으로 다시 들어감.
+// 현재 refresh_token을 errorCallback에서 재 발급 받아야 하는데,
+// 그렇게 되었을떄,  util -> oauth_request인증, api_request 메소드 부분을 여기까지 들고 와야 한다.
+// 가능한가?
+
+
 function errorCallback(){
-	alert("콜백 하잉~");
-	return 0;
+	alert("Acccesstoken이 만료 되었습니다. 로그인을 다시 해주시기 바랍니다.");
+	location.href = "https://front.ksdev.net/login";
 }
 
 
 
 var AJAX = {
 	// get 구현 X
-	// urlc=>, form => form 내용, oken => accesstoken 값
+	// urlc=>, form => form 내용, token => accesstoken 값
 	post: function(urlc, form, token){
 		$.ajax({
 			type: "post",
@@ -34,16 +41,16 @@ var AJAX = {
 			},
 			fail: function (data){
 				if(data.code == 401){
-					errorCallback();
+					errorCallback(); // 토큰 권한 문제라면 콜백함수 호출
 				}else{
-					alert("콜백함수로 안갔어. 10초 안에 들어왔어");
+					alert(date.message);
 				}
 			},
 			error: function (data){
 				if(data.code == 401){
-					errorCallback();
+					errorCallback(); // 토큰 권한 문제라면 콜백함수 호출
 				}else{
-					alert("콜백함수로 안갔어. 10초 안에 들어왔어");
+					alert(date.message);
 				}
 			}
 		});
@@ -102,5 +109,5 @@ var AJAX = {
 				alert(data.message);
 			}
 		});
-	}
+	},
 }
