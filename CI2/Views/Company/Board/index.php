@@ -5,7 +5,7 @@
 
 <script>
 	$(document).ready(function() {
-		getList();
+		//getList();
 		console.log(getList());
 	});
 

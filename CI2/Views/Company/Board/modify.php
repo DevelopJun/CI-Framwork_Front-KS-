@@ -7,7 +7,7 @@
 <script>
 // jwt 토큰 보안 - loal localStorage 에 넣는 방법1 (불필요시 삭제)
 function saveJWT(){
-    localStorage.setItem('jwt_token', '<?= $_SESSION['ksadmin']['sAccessToken'] ?>' );
+    localStorage.setItem('jwt_token', '<?= $_SESSION['admin']['sAccessToken'] ?>' );
 };
 saveJWT();
 </script>
@@ -26,7 +26,7 @@ if( i == 0){
 i++ ;
 date.setTime(expireTime);
 compare = expireTime;
-document.cookie = 'jwt_token=<?= $_SESSION['ksadmin']['sAccessToken'] ?>;expires='+date+';path=/';
+document.cookie = 'jwt_token=<?= $_SESSION['admin']['sAccessToken'] ?>;expires='+date+';path=/';
 </script>
 
 
