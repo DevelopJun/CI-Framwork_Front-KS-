@@ -75,7 +75,6 @@ document.cookie = 'jwt_token=<?= $_SESSION['admin']['sAccessToken'] ?>;expires='
                     document.write("<br>");
                     document.write(nowdate);
                     document.write("<br>");
-
                 </script>
             </div>
             <div class="js-clock">
@@ -84,7 +83,7 @@ document.cookie = 'jwt_token=<?= $_SESSION['admin']['sAccessToken'] ?>;expires='
 			<div class="card-body">
 				<div class="tab-content">
 					<div class="tab-pane fade show active" id="tabs-eg-77" style="min-height: 400px">
-						<form class="form-inline" name="writeform" action="javascript:write()">
+						<form class="block" name="writeform" action="javascript:write()">
 							<input type="hidden" name="admin_idx" value="<?= $_SESSION['info']['idx'] ?>">
                             <label for="title">	제목 : </label>
 				            <input type="text" name="title" value="" placeholder="제목"><br>
@@ -92,7 +91,7 @@ document.cookie = 'jwt_token=<?= $_SESSION['admin']['sAccessToken'] ?>;expires='
 							<input type="text" name="content" value="" placeholder="내용"><br>
 							<input type="submit" value="작성">
 							<input type="button" onclick="location.href='/company/board';" value="목록으로">
-						</form>
+                        </form>
 					</div>
 				</div>
 			</div>

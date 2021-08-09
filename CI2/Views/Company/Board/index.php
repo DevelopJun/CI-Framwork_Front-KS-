@@ -5,13 +5,12 @@
 
 <script>
 	$(document).ready(function() {
-		//getList();
-		console.log(getList());
+		getList();
 	});
 
 	function getList(){
 		dTCreate("board", "/api/v1/ksadmin/admin/board", Cols, '20','','search');
-		console.log(dTCreate);
+
 	}
 
 	var Cols = function(){
@@ -20,7 +19,6 @@
 		Cols.push({ "data": null,"title":"No",width:'3%',render:function(data, type, row, meta){
 			return '--';
 		}});
-		console.log(Cols);
 		Cols.push({ "data": null, "title": "제목", "name":"", render: function (data){
 			html = '<a href="/company/board/detail?idx=' + data.idx + '">' + data.title + '</a>';
 			return html;
