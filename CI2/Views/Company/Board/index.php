@@ -1,17 +1,48 @@
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
+
 <!-- 토큰 쿠키 저장 연결 js 파일-->
 <script src="/js/Ajax/setcookie.js"></script>
 <!-- Ajax 공통 모듈 연결 js 파일-->
 <script src="/js/Ajax/Ajax(common).js"></script>
+<script>
+function madetime(){
+    var dateo = new Date();
+    var time = dateo.getTime();
+    var expireTime = time + timeset; // 현재 쿠키 만료 약 30초 설정(테스트 진행)
+    dateo.setTime(expireTime);
+    var final = dateo.setTime(expireTime);
+    console.log(localStorage.getItem('time'));
+    if (localStorage.getItem('time') == null){
+        localStorage.setItem('time', final);
+    }
+	document.cookie = 'jwt_token=<?= $_SESSION['admin']['sAccessToken'] ?>;expires='+ dateo +';path=/';
+};
+madetime();
+</script>
 
 <script>
 	$(document).ready(function() {
-		getList();
+        console.log('<?= $date ?>');
+        const Toast = Swal.mixin({
+        toast: true,
+        position: 'center-center',
+        showConfirmButton: false,
+        timer: 1000,
+        timerProgressBar: true,
+        didOpen: (toast) => {
+            toast.addEventListener('mouseenter', Swal.stopTimer)
+            toast.addEventListener('mouseleave', Swal.resumeTimer)
+        }
+    })
+
+    Toast.fire({
+        icon: 'success',
+        title: '조금만 기다려주세요, 게시판을 불러오고 있습니다.'
+    })
+		AJAX.get(getCookie('jwt_token')); // Ajax 공통모듈 분리 완료.
+		dTCreate("board", "/api/v1/ksadmin/admin/board", Cols, '20','','search');
 	});
 
-	function getList(){
-		dTCreate("board", "/api/v1/ksadmin/admin/board", Cols, '20','','search');
-
-	}
 
 	var Cols = function(){
 		var Cols = [];
@@ -54,3 +85,5 @@
 		</div>
 	</div>
 </div>
+
+<script src="/js/topclock.js"></script>

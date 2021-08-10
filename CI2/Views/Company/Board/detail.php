@@ -36,7 +36,7 @@ document.cookie = 'jwt_token=<?= $_SESSION['admin']['sAccessToken'] ?>;expires='
         if(timec <= compare){
             console.log("쿠키 만료되기 전에 정상적으로 작성 되었습니다.");
             if (confirm("삭제하시겠습니까?")){
-                AJAX.delete('https://apigw.ksdev.net/api/v1/ksadmin/admin/board/', idx, <?= $_SESSION['info']['idx'] ?>, <?= $idx ?>, getCookie('jwt_token')); // Ajax 공통모듈 분리 완료.
+                AJAX.delete('https://admin-api.ksdev.net/api/v1/ksadmin/admin/board/', idx, <?= $_SESSION['info']['idx'] ?>, <?= $idx ?>, getCookie('jwt_token')); // Ajax 공통모듈 분리 완료.
     		}
         }else{
             console.log("쿠키가 만료되어 글을 삭제할 수 없습니다.");

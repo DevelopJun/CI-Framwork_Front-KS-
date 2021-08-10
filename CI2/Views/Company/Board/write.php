@@ -33,7 +33,6 @@ document.cookie = 'jwt_token=<?= $_SESSION['admin']['sAccessToken'] ?>;expires='
 
 <script>
 	function write(){
-
         var date = new Date();
         var timec = date.getTime();
         if (timec <= compare){
@@ -47,7 +46,7 @@ document.cookie = 'jwt_token=<?= $_SESSION['admin']['sAccessToken'] ?>;expires='
                 alert("내용을 입력해주세요.");
                 return;
             }
-            AJAX.post( "https://apigw.ksdev.net/api/v1/ksadmin/admin/board", $(form), getCookie('jwt_token')); // Ajax 공통모듈 분리 완료
+            AJAX.post( "https://admin-api.ksdev.net/api/v1/ksadmin/admin/board", $(form), getCookie('jwt_token')); // Ajax 공통모듈 분리 완료
         } else {
             console.log("쿠키가 만료되어 글을 작성할 수 없습니다.");
             alert("쿠키가 만료되어 글을 작성할 수 없습니다.");
@@ -77,9 +76,9 @@ document.cookie = 'jwt_token=<?= $_SESSION['admin']['sAccessToken'] ?>;expires='
                     document.write("<br>");
                 </script>
             </div>
-            <div class="js-clock">
+            <!-- <div class="js-clock">
                 <h1>00:00</h1>
-            </div>
+            </div> -->
 			<div class="card-body">
 				<div class="tab-content">
 					<div class="tab-pane fade show active" id="tabs-eg-77" style="min-height: 400px">
@@ -103,4 +102,4 @@ document.cookie = 'jwt_token=<?= $_SESSION['admin']['sAccessToken'] ?>;expires='
 </div>
 
 
-<script src="/js/clock.js"></script>
+<!-- <script src="/js/clock.js"></script> -->
