@@ -14,20 +14,52 @@
 function errorCallback(){
 	alert("Acccesstoken이 만료 되었습니다. 로그인을 다시 해주시기 바랍니다.");
 	location.href = "https://front.ksdev.net/login";
+
 }
 
-
-
 var AJAX = {
-	// get 구현 X
+	// get 구현 O
+	get: function(token){
+		$.ajax({
+			type: "GET",
+			url: 'https://admin-api.ksdev.net/api/v1/ksadmin/admin/board', //url로 하면 이름 같아서 에러 발생
+			beforeSend:function(xhr){
+				xhr.setRequestHeader('Content-type','application/x-www-form-urlencoded');
+				xhr.setRequestHeader('Authorization', 'Bearer '+ token);
+			},
+			success: function (data){
+				if (data.code == 200){
+
+					console.log(data.message);
+				} else {
+					alert(data.message);
+				}
+			},
+			fail: function (data){
+				if(data.code == 401){
+					errorCallback(); // 토큰 권한 문제라면 콜백함수 호출
+				}else{
+					alert(date.message);
+				}
+			},
+			error: function (data){
+				if(data.code == 401){
+					errorCallback(); // 토큰 권한 문제라면 콜백함수 호출
+				}else{
+					alert(date.message);
+				}
+			}
+		});
+	},
+
 	// urlc=>, form => form 내용, token => accesstoken 값
 	post: function(urlc, form, token){
 		$.ajax({
 			type: "post",
 			data: form.serialize(),
-			contentType: "application/x-www-form-urlencoded",
 			url: urlc, //url로 하면 이름 같아서 에러 발생
 			beforeSend:function(xhr){
+				xhr.setRequestHeader('Content-type','application/x-www-form-urlencoded');
 				xhr.setRequestHeader('Authorization', 'Bearer '+ token);
 			},
 			success: function (data){
@@ -61,9 +93,9 @@ var AJAX = {
 		$.ajax({
 			type: "put",
 			data: form.serialize(),
-			contentType: "application/x-www-form-urlencoded",
-			url: `https://apigw.ksdev.net/api/v1/ksadmin/admin/board/${idx}`,
+			url: `https://admin-api.ksdev.net/api/v1/ksadmin/admin/board/${idx}`,
 			beforeSend:function(xhr){
+				xhr.setRequestHeader('Content-type','application/x-www-form-urlencoded');
 				xhr.setRequestHeader('Authorization', 'Bearer '+ token);
 			},
 			success: function (data){
@@ -75,24 +107,33 @@ var AJAX = {
 				}
 			},
 			fail: function (data){
-				alert(data.message);
+				if(data.code == 401){
+					errorCallback(); // 토큰 권한 문제라면 콜백함수 호출
+				}else{
+					alert(date.message);
+				}
 			},
 			error: function (data){
-				alert(data.message);
+				if(data.code == 401){
+					errorCallback(); // 토큰 권한 문제라면 콜백함수 호출
+				}else{
+					alert(date.message);
+				}
 			}
 		});
 
 	},
 	// url => url 로, idx => 게시물 번호, Aidx => 사용자 번호, idxn=> url idx 번호, token => accesstoken 값
 	delete: function(url, idx, Aidx, idxn, token){
+		console.log(getCookie('jwt_token'));
 		$.ajax({
 			type: "delete",
 			async:false,
-			data: {idx:idx,admin_idx:Aidx},
-			contentType: "application/x-www-form-urlencoded",
+			data: JSON.stringify({idx:idx,admin_idx:Aidx}),
 			url: url + idxn,
-			beforeSend:function(xhr){
-				xhr.setRequestHeader('Authorization', 'Bearer '+ token);
+			beforeSend:function(request){
+				request.setRequestHeader('Content-type','application/json');
+				request.setRequestHeader('Authorization', 'Bearer '+ token);
 			},
 			success: function (data){
 				if (data.code == 200){
@@ -103,10 +144,18 @@ var AJAX = {
 				}
 			},
 			fail: function (data){
-				alert(data.message);
+				if(data.code == 401){
+					errorCallback(); // 토큰 권한 문제라면 콜백함수 호출
+				}else{
+					alert(date.message);
+				}
 			},
 			error: function (data){
-				alert(data.message);
+				if(data.code == 401){
+					errorCallback(); // 토큰 권한 문제라면 콜백함수 호출
+				}else{
+					alert(date.message);
+				}
 			}
 		});
 	},
