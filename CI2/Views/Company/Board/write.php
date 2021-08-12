@@ -2,19 +2,6 @@
 
 <script>
 var extend = 0;
-function madetime(){
-    const timeset = 8000 * 10;
-    var dateo = new Date();
-    var time = dateo.getTime();
-    var expireTime = time + timeset; // timeset 시간 설정 조율 부분
-    dateo.setTime(expireTime);
-    var final = dateo.setTime(expireTime);
-    console.log(final);
-    if (localStorage.getItem('time') == null || extend == 1 ){
-        localStorage.setItem('time', final);
-    }
-	document.cookie = 'jwt_token=<?= $_SESSION['admin']['sAccessToken'] ?>;expires='+ dateo +';path=/';
-};
 madetime();
 </script>
 
@@ -29,7 +16,7 @@ madetime();
                 alert("내용을 입력해주세요.");
                 return;
             }
-            AJAX.post( "https://admin-api.ksdev.net/api/v1/ksadmin/admin/board", $(form), getCookie('jwt_token')); // Ajax 공통모듈 분리 완료
+            AJAX.post( "https://admin-api.ksdev.net/api/v1/ksadmin/admin/board", $(form)); // Ajax 공통모듈.
         }
 </script>
 <div class="row">

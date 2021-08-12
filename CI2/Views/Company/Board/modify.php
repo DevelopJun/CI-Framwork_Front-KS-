@@ -1,19 +1,6 @@
 <script>
-var extend = 0;
-function madetime(){
-    const timeset = 8000 * 10;
-    var dateo = new Date();
-    var time = dateo.getTime();
-    var expireTime = time + timeset; // timeset 시간 설정 조율 부분
-    dateo.setTime(expireTime);
-    var final = dateo.setTime(expireTime);
-    console.log(localStorage.getItem('time'));
-    if (localStorage.getItem('time') == null || extend == 1){
-        localStorage.setItem('time', final);
-    }
-	document.cookie = 'jwt_token=<?= $_SESSION['admin']['sAccessToken'] ?>;expires='+ dateo +';path=/';
-};
-madetime();
+    var extend = 0;
+    madetime();
 </script>
 
 
@@ -28,9 +15,8 @@ madetime();
     			alert("내용을 입력해주세요.");
     			return;
     		}
-    		AJAX.put($(form),<?= $idx ?>, getCookie('jwt_token')); // Ajax 공통모듈 분리 완료.
+    		AJAX.put($(form),<?= $idx ?>); // Ajax 공통모듈 
         }
-
 </script>
 <div class="row">
 	<div class="col-md-12 col-lg-12">

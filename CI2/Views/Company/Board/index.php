@@ -1,31 +1,14 @@
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
 
 <script>
-var extend = 0;
-function madetime(extend){
-    console.log("잘 들어왔는데");
-    console.log(extend);
-    const timeset = 8000 * 10;
-    var dateo = new Date();
-    var time = dateo.getTime();
-    var expireTime = time + timeset; // timeset 시간 설정 조율 부분
-    dateo.setTime(expireTime);
-    var final = dateo.setTime(expireTime);
-    if (localStorage.getItem('time') == null){
-        localStorage.setItem('time', final);
-    }else if(extend == 1){
-        console.log("time 재 업로드");
-        localStorage.removeItem('time');
-        localStorage.setItem('time', final);
-    }
-	document.cookie = 'jwt_token=<?= $_SESSION['admin']['sAccessToken'] ?>;expires='+ dateo +';path=/';
-}
-madetime();
+    var extend = 0;
+    madetime();
+    notify();
 </script>
-
 
 <script>
 	$(document).ready(function() {
+
         const Toast = Swal.mixin({
         toast: true,
         position: 'center-center',
@@ -37,15 +20,12 @@ madetime();
             toast.addEventListener('mouseleave', Swal.resumeTimer)
         }
     })
-
     Toast.fire({
         icon: 'success',
         title: '조금만 기다려주세요, 게시판을 불러오고 있습니다.'
     })
-		AJAX.get('https://admin-api.ksdev.net/api/v1/ksadmin/admin/board', getCookie('jwt_token')); // Ajax 공통모듈 분리 완료.
 		dTCreate("board", "/api/v1/ksadmin/admin/board", Cols, '20','','search');
 	});
-
 
 	var Cols = function(){
 		var Cols = [];
@@ -66,6 +46,7 @@ madetime();
 		return Cols;
 	}
 </script>
+
 <div class="row">
 	<div class="col-md-12 col-lg-12">
 		<div class="mb-3 card">
